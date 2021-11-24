@@ -17,6 +17,7 @@
         </div>
         <div class="col">
           <input type="tel" name="qty" class="form-control" placeholder="qty">
+          @error('qty') <span class="text-danger text-sm">{{ $message }}</span> @enderror
         </div>
         <div class="col">
           <input type="submit" value="Simpan" class="btn btn-primary">

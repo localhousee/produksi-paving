@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
-use App\Models\BahanBaku;
 use App\Models\TransaksiBeli;
 use App\Http\Requests\TransaksiBeliRequest;
 use App\Models\KeranjangBeli;
@@ -44,9 +43,7 @@ class TransaksiBeliController extends Controller
         // https://laravel.com/docs/8.x/eloquent-collections#method-find
         $transaksi = TransaksiBeli::with(['supplier:id,nama_supplier', 'bahan_baku:id,jenis'])->find($transaksi);
         
-        return view('transaksibeli.show', [
-            'transaksi' => $transaksi,
-        ]);
+        return view('transaksibeli.show', ['transaksi' => $transaksi]);
     }
 
     public function destroy($transaksi)

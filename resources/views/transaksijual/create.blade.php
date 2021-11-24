@@ -25,7 +25,8 @@
       @error('total') <span class="text-sm text-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12">
-      <input type="text" value="{{ $transaksi->status }}" name="status" class="form-control" placeholder="status">
+      <input type="radio" name="status" value="lunas">Lunas
+      <input type="radio" name="status" value="DP">DP
       @error('status') <span class="text-sm text-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12">

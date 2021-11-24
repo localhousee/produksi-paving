@@ -12,6 +12,7 @@
         <th>No</th>
         <th>Tanggal Transaksi</th>
         <th>No Nota</th>
+        <th>Status</th>
         <th colspan="2">Opsi</th>
       </tr>
     </thead>
@@ -21,8 +22,13 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $t->tgl_transaksi }}</td>
           <td>{{ $t->no_nota }}</td>
+          <td>{{ $t->status }}</td>
           <td><a class="text-success" href="{{ route('transaksi-jual.show', ['transaksi_jual' => $t->id]) }}">Detail</a></td>
-          <td><a class="text-primary" href="{{ route('transaksi-jual.edit', ['transaksi_jual' => $t->id]) }}">Edit</a></td>
+          <td>
+            @if ($t->status !== 'lunas')
+              <a class="text-primary" href="{{ route('transaksi-jual.edit', ['transaksi_jual' => $t->id]) }}">Lunas</a>
+            @endif
+          </td>
           <td>
             <a class="text-danger nav-link" href="#" data-toggle="modal" data-target="#delete{{ $t->id }}">
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

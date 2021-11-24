@@ -28,6 +28,7 @@ class KeranjangBeliController extends Controller
         $transaksi = TransaksiBeli::find(TransaksiBeli::max('id'));
 
         $bahanBaku = BahanBaku::find($request->bahan_baku_id);
+
         $bahanBaku->transaksi_beli()->attach($transaksi, [
             'qty' => $request->qty,
             'subtotal' => $bahanBaku->harga * $request->qty
@@ -52,7 +53,7 @@ class KeranjangBeliController extends Controller
         $bahanBaku = $transaksi->bahan_baku()->find($keranjang->bahan_baku_id)->first();
 
         $bahanBaku->update([
-            'stok' => $bahanBaku->stok - $keranjang->qty + $request->qty
+            'stok' => $bahanBaku->stok + $keranjang->qty - $request->qty
         ]);
 
         $transaksi->bahan_baku()->updateExistingPivot($bahanBaku, [
@@ -67,10 +68,10 @@ class KeranjangBeliController extends Controller
     {
         $keranjang = KeranjangBeli::find($keranjang);
         $transaksi = TransaksiBeli::find($keranjang->transaksi_beli_id);
-        $bahanBaku = $transaksi->bahan_baku()->find($keranjang->bahan_baku_id)->first();
+        $bahan_baku = $transaksi->bahan_baku()->find($keranjang->bahan_baku_id)->first();
         
-        $bahanBaku->update([
-            'stok' =>$bahanBaku->stok - $transaksi->bahan_baku[0]->bahan_baku->qty,
+        $bahan_baku->update([
+            'stok' =>$bahan_baku->stok + $transaksi->bahan_baku[0]->bahan_baku->qty,
         ]);
 
         $keranjang->delete();

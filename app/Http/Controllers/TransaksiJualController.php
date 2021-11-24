@@ -51,18 +51,9 @@ class TransaksiJualController extends Controller
     public function edit($transaksi)
     {   
         $transaksi = TransaksiJual::find($transaksi);
-        return view('transaksijual.edit', [
-            'transaksi' => $transaksi,
-        ]);
-    }
-
-    public function update($transaksi, TransaksiJualRequest $request)
-    {
-        $transaksi = TransaksiJual::find($transaksi);;
-
-        // https://laravel.com/docs/8.x/eloquent#mass-updates
-        $transaksi->update($request->validated());
-
+        $transaksi->status = 'lunas';
+        $transaksi->bayar = $transaksi->total;
+        $transaksi->save();
         return redirect(route('transaksi-jual.index'))->with('success', 'Data Telah Disimpan');
     }
 

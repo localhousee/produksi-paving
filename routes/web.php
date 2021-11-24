@@ -30,7 +30,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('paving', PavingController::class);
     Route::resource('keranjang-jual', KeranjangJualController::class);
     Route::resource('keranjang-beli', KeranjangBeliController::class);
-    Route::resource('transaksi-jual', TransaksiJualController::class);
+    Route::resource('transaksi-jual', TransaksiJualController::class)->except('update');
     Route::resource('transaksi-beli', TransaksiBeliController::class);
     // https://laravel.com/docs/8.x/controllers#restful-nested-resources
     Route::resource('produksi.paving', ProduksiPavingController::class);
