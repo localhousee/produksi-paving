@@ -17,8 +17,8 @@ class CreateBahanBakuTable extends Migration
             $table->id();
             $table->enum('jenis', ['abu batu', 'semen']);
             $table->string('merk', 45);
-            $table->double('harga_satuan');
-            $table->double('stok');
+            $table->integer('harga');
+            $table->integer('stok');
             $table->string('satuan', 45);
         });
     }

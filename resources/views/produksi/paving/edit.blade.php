@@ -11,10 +11,6 @@
         @error('jumlah_produksi') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="tel" value="{{ $paving->paving->jumlah_bahanbaku_dipakai }}" class="form-control" name="jumlah_bahanbaku_dipakai" placeholder="Jumlah Bahan Baku Dipakai">
-        @error('jumlah_bahanbaku_dipakai') <span class="text-danger text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div class="col-12">
         <button type="submit" class="btn btn-primary">Simpan</button>
       </div>
     </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBahanBakuTransaksiBeliTable extends Migration
+class CreateKeranjangBeliTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateBahanBakuTransaksiBeliTable extends Migration
      */
     public function up()
     {
-        Schema::create('bahan_baku_transaksi_beli', function (Blueprint $table) {
+        Schema::create('keranjang_beli', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('transaksi_beli_id')->nullable()->constrained('transaksi_beli');
             $table->foreignId('bahan_baku_id')->constrained('bahan_baku');
-            $table->foreignId('transaksi_beli_id')->constrained('transaksi_beli');
-            $table->double('harga');
-            $table->double('qty');
-            $table->double('subtotal');
+            $table->integer('qty');
+            $table->integer('subtotal');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateBahanBakuTransaksiBeliTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bahan_baku_transaksi_beli');
+        Schema::dropIfExists('keranjang_beli');
     }
 }

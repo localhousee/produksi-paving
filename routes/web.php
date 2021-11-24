@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\KeranjangBeliController;
+use App\Http\Controllers\KeranjangJualController;
 use App\Http\Controllers\PavingController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\ProduksiController;
@@ -23,9 +25,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // https://laravel.com/docs/8.x/controllers#restful-partial-resource-routes
     Route::resource('pembeli', PembeliController::class)->except('show');
     Route::resource('supplier', SupplierController::class)->except('show');
-    Route::resource('paving', PavingController::class)->except('show');
     Route::resource('bahan-baku', BahanBakuController::class)->except('show');
     Route::resource('produksi', ProduksiController::class)->except('show');
+    Route::resource('paving', PavingController::class);
+    Route::resource('keranjang-jual', KeranjangJualController::class);
+    Route::resource('keranjang-beli', KeranjangBeliController::class);
     Route::resource('transaksi-jual', TransaksiJualController::class);
     Route::resource('transaksi-beli', TransaksiBeliController::class);
     // https://laravel.com/docs/8.x/controllers#restful-nested-resources

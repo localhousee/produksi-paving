@@ -14,11 +14,11 @@ class BahanBakuFactory extends Factory
     public function definition()
     {
         return [
-            'jenis' => $this->faker->randomElement(['abu batu', 'semen']),
+            'jenis' => $this->faker->unique()->randomElement(['abu batu', 'semen']),
             'merk' => $this->faker->company(),
-            'harga_satuan' => $this->faker->randomNumber(4, true),
+            'harga' => $this->faker->randomNumber(4, true),
             'stok' => $this->faker->randomNumber(3, true),
-            'satuan' => $this->faker->randomElement(['S', 'M', 'L']),
+            'satuan' => $this->faker->randomElement(['sak', 'm3']),
         ];
     }
 }

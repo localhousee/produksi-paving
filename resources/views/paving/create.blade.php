@@ -10,20 +10,16 @@
         @error('jenis') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="text" class="form-control" name="stok" placeholder="Stok">
+        <input type="tel" class="form-control" name="stok" placeholder="Stok">
         @error('stok') <span class="text-danger text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div class="col-12">
-        <input type="tel" class="form-control" name="stok_biji" placeholder="Stok biji">
-        @error('stok_biji') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <input type="text" class="form-control" name="ukuran" placeholder="Ukuran">
         @error('ukuran') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="text" class="form-control" name="harga_satuan" placeholder="Harga satuan">
-        @error('harga_satuan') <span class="text-danger text-sm">{{ $message }}</span> @enderror
+        <input type="tel" class="form-control" name="harga" placeholder="Harga">
+        @error('harga') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <input type="text" class="form-control" name="deskripsi" placeholder="Deskripsi">
@@ -38,8 +34,12 @@
         @error('gambar') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="tel" class="form-control" name="jumlah_per_palet" placeholder="Jumlah Per Palet">
-        @error('jumlah_per_palet') <span class="text-danger text-sm">{{ $message }}</span> @enderror
+        <input type="tel" class="form-control" name="semen" placeholder="Banyak Semen yang Dibutuhkan (sak)">
+        @error('semen') <span class="text-danger text-sm">{{ $message }}</span> @enderror
+      </div>
+      <div class="col-12">
+        <input type="tel" class="form-control" name="abu_batu" placeholder="Banyak Abu batu yang Dibutuhkan (m2)">
+        @error('abu_batu') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Simpan</button>

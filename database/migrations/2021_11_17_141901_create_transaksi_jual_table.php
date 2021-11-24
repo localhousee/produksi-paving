@@ -17,10 +17,10 @@ class CreateTransaksiJualTable extends Migration
             $table->id();
             $table->string('no_nota', 45);
             $table->date('tgl_transaksi');
-            $table->string('metode_bayar', 45);
-            $table->double('total');
-            $table->string('status', 45)->default('sukses');
-            $table->foreignId('pembeli_id')->constrained('pembeli');
+            $table->string('bayar', 45);
+            $table->string('total');
+            $table->string('status', 45);
+            $table->foreignId('pembeli_id')->nullable()->constrained('pembeli');
         });
     }
 

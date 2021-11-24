@@ -20,9 +20,8 @@ class PavingRequest extends FormRequest
         return [
             'jenis' => ['required', 'max:45', 'string'],
             'stok' => ['required', 'numeric'],
-            'stok_biji' => ['required', 'numeric'],
             'ukuran' => ['required', 'max:45', 'string'],
-            'harga_satuan' => ['required', 'numeric'],
+            'harga' => ['required', 'numeric'],
             'deskripsi' => ['required', 'max:45', 'string'],
             'satuan' => ['required', 'max:45', 'string'],
             'gambar' => [
@@ -32,7 +31,8 @@ class PavingRequest extends FormRequest
                 // https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
                 'mimetypes:image/jpeg,image/png,image/bmp'
             ],
-            'jumlah_per_palet' => ['required', 'numeric'],
+            'semen' => ['required', 'numeric'],
+            'abu_batu' => ['required', 'numeric'],
         ];
     }
 }

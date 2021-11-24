@@ -19,17 +19,17 @@ class BahanBaku extends Model
     public function paving()
     {
         // https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-model-structure
-        return $this->belongsToMany(Paving::class, 'paving_has_bahan_baku')
+        return $this->belongsToMany(Paving::class, 'bahan_baku_paving')
         // https://laravel.com/docs/8.x/eloquent-relationships#customizing-the-pivot-attribute-name
         ->as('paving')
         // https://laravel.com/docs/8.x/eloquent-relationships#retrieving-intermediate-table-columns
-        ->withPivot('jumlah_paving_per_bahanbaku');
+        ->withPivot('semen', 'abu_batu');
     }
 
     public function transaksi_beli()
     {
-        return $this->belongsToMany(TransaksiBeli::class, 'bahan_baku_transaksi_beli')
+        return $this->belongsToMany(TransaksiBeli::class, 'keranjang_beli')
         ->as('transaksi_beli')
-        ->withPivot('harga', 'qty', 'subtotal');
+        ->withPivot('qty', 'subtotal');
     }
 }

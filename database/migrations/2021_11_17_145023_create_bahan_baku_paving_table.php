@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePavingHasBahanBakuTable extends Migration
+class CreateBahanBakuPavingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePavingHasBahanBakuTable extends Migration
      */
     public function up()
     {
-        Schema::create('paving_has_bahan_baku', function (Blueprint $table) {
+        Schema::create('bahan_baku_paving', function (Blueprint $table) {
             $table->foreignId('paving_id')->constrained('paving');
             $table->foreignId('bahan_baku_id')->constrained('bahan_baku');
-            $table->integer('jumlah_paving_per_bahanbaku');
+            $table->integer('jumlah');
         });
     }
 
@@ -27,6 +27,6 @@ class CreatePavingHasBahanBakuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paving_has_bahan_baku');
+        Schema::dropIfExists('bahan_baku_paving');
     }
 }

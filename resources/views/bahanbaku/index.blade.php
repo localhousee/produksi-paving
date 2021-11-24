@@ -12,7 +12,7 @@
         <th>No</th>
         <th>Jenis</th>
         <th>Merk</th>
-        <th>Harga Satuan</th>
+        <th>Harga</th>
         <th>Stok</th>
         <th>Satuan</th>
         <th colspan="2">Opsi</th>
@@ -24,7 +24,7 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $b->jenis }}</th>
           <td>{{ $b->merk }}</td>
-          <td>{{ $b->harga_satuan }}</td>
+          <td>{{ $b->harga }}</td>
           <td>{{ $b->stok }}</td>
           <td>{{ $b->satuan }}</td>
           <td><a href="{{ route('bahan-baku.edit', ['bahan_baku' => $b]) }}" class="text-primary nav-link">Edit</a></td>

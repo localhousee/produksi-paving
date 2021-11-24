@@ -25,10 +25,10 @@ class TransaksiJual extends Model
     public function paving()
     {
         // https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-model-structure
-        return $this->belongsToMany(Paving::class, 'paving_transaksi_jual')
+        return $this->belongsToMany(Paving::class, 'keranjang_jual')
         // https://laravel.com/docs/8.x/eloquent-relationships#customizing-the-pivot-attribute-name
         ->as('paving')
         // https://laravel.com/docs/8.x/eloquent-relationships#retrieving-intermediate-table-columns
-        ->withPivot('harga', 'qty', 'subtotal');
+        ->withPivot('qty', 'subtotal');
     }
 }

@@ -11,15 +11,10 @@
             <option value="{{ $p->id }}">{{ $p->jenis }}</option>
           @endforeach
         </select>
-        @error('paving_id') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <input type="tel" class="form-control" name="jumlah_produksi" placeholder="Jumlah Produksi">
         @error('jumlah_produksi') <span class="text-danger text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div class="col-12">
-        <input type="tel" class="form-control" name="jumlah_bahanbaku_dipakai" placeholder="Jumlah Bahan Baku Dipakai">
-        @error('jumlah_bahanbaku_dipakai') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Simpan</button>

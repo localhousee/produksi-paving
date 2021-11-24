@@ -16,13 +16,11 @@ class PavingFactory extends Factory
         return [
             'jenis' => $this->faker->firstName(),
             'stok' => $this->faker->randomNumber(3),
-            'stok_biji' => $this->faker->randomNumber(3),
-            'ukuran' => $this->faker->randomElement(['S', 'M', 'L']),
-            'harga_satuan' => $this->faker->randomNumber(5, true),
+            'ukuran' => $this->faker->randomLetter(),
+            'harga' => $this->faker->randomNumber(4, true),
             'deskripsi' => $this->faker->sentence(3),
             'satuan' => $this->faker->randomLetter(),
             'gambar' => null,
-            'jumlah_per_palet' => $this->faker->randomDigitNotNull(),
         ];
     }
 }

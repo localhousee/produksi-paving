@@ -25,7 +25,6 @@ class ProduksiPavingRequest extends FormRequest
                 'numeric'
             ],
             'jumlah_produksi' => ['required', 'numeric'],
-            'jumlah_bahanbaku_dipakai' => ['required', 'numeric'],
         ];
     }
 }

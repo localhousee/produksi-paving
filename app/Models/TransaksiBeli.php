@@ -25,10 +25,10 @@ class TransaksiBeli extends Model
     public function bahan_baku()
     {
         // https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-model-structure
-        return $this->belongsToMany(BahanBaku::class, 'bahan_baku_transaksi_beli')
+        return $this->belongsToMany(BahanBaku::class, 'keranjang_beli')
         // https://laravel.com/docs/8.x/eloquent-relationships#customizing-the-pivot-attribute-name
         ->as('bahan_baku')
         // https://laravel.com/docs/8.x/eloquent-relationships#retrieving-intermediate-table-columns
-        ->withPivot('harga', 'qty', 'subtotal');
+        ->withPivot('qty', 'subtotal');
     }
 }

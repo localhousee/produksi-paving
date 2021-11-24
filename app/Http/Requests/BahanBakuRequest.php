@@ -21,7 +21,7 @@ class BahanBakuRequest extends FormRequest
         return [
             'jenis' => ['required', Rule::in(['abu batu', 'semen'])],
             'merk' => ['required', 'max:45', 'string'],
-            'harga_satuan' => ['required', 'numeric'],
+            'harga' => ['required', 'numeric'],
             'stok' => ['required', 'numeric'],
             'satuan' => ['required', 'max:45', 'string'],
         ];

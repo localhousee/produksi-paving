@@ -6,20 +6,15 @@
    <div class="alert alert-success">{{ session('success') }}</div>
   @endif
   <a href="{{ route('paving.create') }}" class="btn btn-primary mb-2">Tambah</a>
-  <table class="table table-hover table-responsive">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>No</th>
         <th>Jenis</th>
         <th>Stok</th>
-        <th>Stok Biji</th>
         <th>Ukuran</th>
-        <th>Harga Satuan</th>
         <th>Deskripsi</th>
-        <th>Satuan</th>
-        <th>Gambar</th>
-        <th>Jumlah Per Palet</th>
-        <th colspan="2">Opsi</th>
+        <th colspan="3">Opsi</th>
       </tr>
     </thead>
     <tbody>
@@ -28,13 +23,9 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $p->jenis }}</th>
           <td>{{ $p->stok }}</td>
-          <td>{{ $p->stok_biji }}</td>
           <td>{{ $p->ukuran }}</td>
-          <td>{{ $p->harga_satuan }}</td>
           <td>{{ $p->deskripsi }}</td>
-          <td>{{ $p->satuan }}</td>
-          <td><img src="{{ $p->gambar }}" height="20px" width="20px"></td>
-          <td>{{ $p->jumlah_per_palet }}</td>
+          <td><a href="{{ route('paving.show', ['paving' => $p]) }}" class="text-success nav-link">Detail</a></td>
           <td><a href="{{ route('paving.edit', ['paving' => $p]) }}" class="text-primary nav-link">Edit</a></td>
           <td>
             <a class="text-danger nav-link" href="#" data-toggle="modal" data-target="#delete{{ $p->id }}">

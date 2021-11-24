@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProduksiHasPavingTable extends Migration
+class CreateProduksiPavingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProduksiHasPavingTable extends Migration
      */
     public function up()
     {
-        Schema::create('produksi_has_paving', function (Blueprint $table) {
+        Schema::create('produksi_paving', function (Blueprint $table) {
             $table->foreignId('produksi_id')->constrained('produksi');
             $table->foreignId('paving_id')->constrained('paving');
             $table->integer('jumlah_produksi');
-            $table->double('jumlah_bahanbaku_dipakai');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateProduksiHasPavingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produksi_has_paving');
+        Schema::dropIfExists('produksi_paving');
     }
 }

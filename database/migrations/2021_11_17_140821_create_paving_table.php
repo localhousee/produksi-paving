@@ -17,13 +17,11 @@ class CreatePavingTable extends Migration
             $table->id();
             $table->string('jenis', 45);
             $table->integer('stok');
-            $table->integer('stok_biji');
             $table->string('ukuran', 45);
-            $table->double('harga_satuan');
+            $table->integer('harga');
             $table->string('deskripsi', 45);
             $table->string('satuan', 45);
             $table->string('gambar')->nullable();
-            $table->integer('jumlah_per_palet');
         });
     }
 

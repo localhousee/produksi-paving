@@ -16,24 +16,27 @@
       <td>: {{ $transaksi->tgl_transaksi }}</td>
     </tr>
     <tr>
-      <td>Metode Bayar</td>
-      <td>: {{ $transaksi->metode_bayar }}</td>
+      <td>Bayar</td>
+      <td>: {{ $transaksi->bayar }}</td>
     </tr>
     <tr>
-      <td>Paving</td>
-      <td>: {{ $transaksi->paving[0]->jenis }}</td>
-    </tr>
-    <tr>
-      <td>Qty</td>
-      <td>: {{ $transaksi->paving[0]->paving->qty }}</td>
-    </tr>
-    <tr>
-      <td>Harga</td>
-      <td>: {{ $transaksi->paving[0]->paving->harga }}</td>
-    </tr>
-    <tr>
-      <td>Subtotal</td>
-      <td>: {{ $transaksi->paving[0]->paving->subtotal }}</td>
+      <td>Daftar Paving</td>
+      <td>
+        <table class="table">
+          <tr>
+            <td>Jenis</td>
+            <td>Qty</td>
+            <td>Subtotal</td>
+          </tr>
+          @foreach ($transaksi->paving as $p)
+            <tr>
+              <td>{{ $p->jenis }}</td>
+              <td>{{ $p->paving->qty }}</td>
+              <td>{{ $p->paving->subtotal }}</td>
+            </tr>
+          @endforeach
+        </table>
+      </td>
     </tr>
     <tr>
       <td>Total</td>

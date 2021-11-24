@@ -11,20 +11,16 @@
         @error('jenis') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="text" value="{{ $paving->stok }}" class="form-control" name="stok" placeholder="Stok">
+        <input type="tel" value="{{ $paving->stok }}" class="form-control" name="stok" placeholder="Stok">
         @error('stok') <span class="text-danger text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div class="col-12">
-        <input type="tel" value="{{ $paving->stok_biji }}" class="form-control" name="stok_biji" placeholder="Stok biji">
-        @error('stok_biji') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <input type="text" value="{{ $paving->ukuran }}" class="form-control" name="ukuran" placeholder="Ukuran">
         @error('ukuran') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="text" value="{{ $paving->harga_satuan }}" class="form-control" name="harga_satuan" placeholder="Harga satuan">
-        @error('harga_satuan') <span class="text-danger text-sm">{{ $message }}</span> @enderror
+        <input type="tel" value="{{ $paving->ukuran }}" class="form-control" name="harga" placeholder="Harga">
+        @error('harga') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <input type="text" value="{{ $paving->deskripsi }}" class="form-control" name="deskripsi" placeholder="Deskripsi">
@@ -39,8 +35,12 @@
         @error('gambar') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="tel" value="{{ $paving->jumlah_per_palet }}" class="form-control" name="jumlah_per_palet" placeholder="Jumlah Per Palet">
-        @error('jumlah_per_palet') <span class="text-danger text-sm">{{ $message }}</span> @enderror
+        <input type="tel" value="{{ $paving->bahan_baku[0]->bahan_baku->semen }}" class="form-control" name="semen" placeholder="Banyak Semen yang Dibutuhkan (sak)">
+        @error('semen') <span class="text-danger text-sm">{{ $message }}</span> @enderror
+      </div>
+      <div class="col-12">
+        <input type="tel" value="{{ $paving->bahan_baku[0]->bahan_baku->abu_batu }}" class="form-control" name="abu_batu" placeholder="Banyak Abu batu yang Dibutuhkan (m2)">
+        @error('abu_batu') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Simpan</button>

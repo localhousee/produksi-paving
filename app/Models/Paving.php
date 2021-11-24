@@ -25,24 +25,24 @@ class Paving extends Model
     public function produksi()
     {
         // https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-model-structure
-        return $this->belongsToMany(Produksi::class, 'produksi_has_paving')
+        return $this->belongsToMany(Produksi::class, 'produksi_paving')
         // https://laravel.com/docs/8.x/eloquent-relationships#customizing-the-pivot-attribute-name
         ->as('produksi')
         // https://laravel.com/docs/8.x/eloquent-relationships#retrieving-intermediate-table-columns
-        ->withPivot('jumlah_produksi', 'jumlah_bahanbaku_dipakai');
+        ->withPivot('jumlah_produksi');
     }
 
     public function bahan_baku()
     {
-        return $this->belongsToMany(BahanBaku::class, 'paving_has_bahan_baku')
+        return $this->belongsToMany(BahanBaku::class, 'bahan_baku_paving')
         ->as('bahan_baku')
-        ->withPivot('jumlah_paving_per_bahanbaku');
+        ->withPivot('jumlah');
     }
 
     public function transaksi_jual()
     {
-        return $this->belongsToMany(TransaksiJual::class, 'paving_transaksi_jual')
+        return $this->belongsToMany(TransaksiJual::class, 'keranjang_jual')
         ->as('transaksi_jual')
-        ->withPivot('harga', 'qty', 'subtotal');
+        ->withPivot('qty', 'subtotal');
     }
 }

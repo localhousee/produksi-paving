@@ -19,10 +19,10 @@ class Produksi extends Model
     public function paving()
     {
         // https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-model-structure
-        return $this->belongsToMany(Paving::class, 'produksi_has_paving')
+        return $this->belongsToMany(Paving::class, 'produksi_paving')
         // https://laravel.com/docs/8.x/eloquent-relationships#customizing-the-pivot-attribute-name
         ->as('paving')
         // https://laravel.com/docs/8.x/eloquent-relationships#retrieving-intermediate-table-columns
-        ->withPivot('jumlah_produksi', 'jumlah_bahanbaku_dipakai');
+        ->withPivot('jumlah_produksi');
     }
 }

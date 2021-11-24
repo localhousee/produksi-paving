@@ -12,7 +12,6 @@
         <th>No</th>
         <th>Jenis</th>
         <th>Jumlah Produksi</th>
-        <th>Jumlah Bahan Baku Yang Dipakai</th>
         <th colspan="2">Opsi</th>
       </tr>
     </thead>
@@ -23,7 +22,6 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $p->jenis }}</td>
             <td>{{ $p->paving->jumlah_produksi }}</td>
-            <td>{{ $p->paving->jumlah_bahanbaku_dipakai }}</td>
             <td><a href="{{ route('produksi.paving.edit', ['produksi' => $produksi, 'paving' => $p]) }}" class="text-primary nav-link">Edit</a></td>
             <td>
               <a class="text-danger nav-link" href="#" data-toggle="modal" data-target="#delete{{ $p->id }}">

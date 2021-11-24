@@ -17,19 +17,22 @@
     </tr>
     <tr>
       <td>Bahan Baku</td>
-      <td>: {{ $transaksi->bahan_baku[0]->jenis }}</td>
-    </tr>
-    <tr>
-      <td>Qty</td>
-      <td>: {{ $transaksi->bahan_baku[0]->bahan_baku->qty }}</td>
-    </tr>
-    <tr>
-      <td>Harga</td>
-      <td>: {{ $transaksi->bahan_baku[0]->bahan_baku->harga }}</td>
-    </tr>
-    <tr>
-      <td>Subtotal</td>
-      <td>: {{ $transaksi->bahan_baku[0]->bahan_baku->subtotal }}</td>
+      <td>
+        <table class="table">
+          <tr>
+            <td>Jenis</td>
+            <td>Qty</td>
+            <td>Subtotal</td>
+          </tr>
+          @foreach ($transaksi->bahan_baku as $b)
+            <tr>
+              <td>{{ $b->jenis }}</td>
+              <td>{{ $b->bahan_baku->qty }}</td>
+              <td>{{ $b->bahan_baku->subtotal }}</td>
+            </tr>
+          @endforeach
+        </table>
+      </td>
     </tr>
     <tr>
       <td>Total</td>

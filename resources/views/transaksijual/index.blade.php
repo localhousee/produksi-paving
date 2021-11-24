@@ -5,11 +5,12 @@
   @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
   @endif
-  <a class="btn btn-primary" href="{{ route('transaksi-jual.create') }}">Tambah</a>
+  <a class="btn btn-primary" href="{{ route('keranjang-jual.create') }}">Tambah</a>
   <table class="table">
     <thead>
       <tr>
         <th>No</th>
+        <th>Tanggal Transaksi</th>
         <th>No Nota</th>
         <th colspan="2">Opsi</th>
       </tr>
@@ -18,9 +19,10 @@
       @foreach ($transaksi as $t)
         <tr>
           <td>{{ $loop->iteration }}</td>
+          <td>{{ $t->tgl_transaksi }}</td>
           <td>{{ $t->no_nota }}</td>
-          <td><a class="text-success" href="{{ route('transaksi-jual.show', ['transaksi_jual' => $t]) }}">Detail</a></td>
-          <td><a class="text-primary" href="{{ route('transaksi-jual.edit', ['transaksi_jual' => $t]) }}">Edit</a></td>
+          <td><a class="text-success" href="{{ route('transaksi-jual.show', ['transaksi_jual' => $t->id]) }}">Detail</a></td>
+          <td><a class="text-primary" href="{{ route('transaksi-jual.edit', ['transaksi_jual' => $t->id]) }}">Edit</a></td>
           <td>
             <a class="text-danger nav-link" href="#" data-toggle="modal" data-target="#delete{{ $t->id }}">
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
