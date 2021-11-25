@@ -19,7 +19,7 @@
         @error('ukuran') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="tel" value="{{ $paving->ukuran }}" class="form-control" name="harga" placeholder="Harga">
+        <input type="tel" value="{{ $paving->harga }}" class="form-control" name="harga" placeholder="Harga">
         @error('harga') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
@@ -35,11 +35,11 @@
         @error('gambar') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="tel" value="" class="form-control" name="semen" placeholder="Banyak Semen yang Dibutuhkan (sak)">
+        <input type="tel" value="{{ $paving->bahan_baku[0]->bahan_baku->jumlah }}" class="form-control" name="semen" placeholder="Banyak Semen yang Dibutuhkan (sak)">
         @error('semen') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">
-        <input type="tel" value="" class="form-control" name="abu_batu" placeholder="Banyak Abu batu yang Dibutuhkan (m2)">
+        <input type="tel" value="{{ $paving->bahan_baku[1]->bahan_baku->jumlah }}" class="form-control" name="abu_batu" placeholder="Banyak Abu batu yang Dibutuhkan (m2)">
         @error('abu_batu') <span class="text-danger text-sm">{{ $message }}</span> @enderror
       </div>
       <div class="col-12">

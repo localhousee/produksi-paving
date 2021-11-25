@@ -64,5 +64,6 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/js/app.min.js"></script>
+  @yield('scripts')
 </body>
 </html>

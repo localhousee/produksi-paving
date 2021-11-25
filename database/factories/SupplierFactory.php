@@ -15,7 +15,7 @@ class SupplierFactory extends Factory
     {
         return [
             'nama_supplier' => $this->faker->name(),
-            'jenis_supplier' => $this->faker->jobTitle(),
+            'jenis_supplier' => $this->faker->word(),
             'alamat_supplier' => $this->faker->streetAddress(),
             'no_telp' => $this->faker->phoneNumber(),
         ];
