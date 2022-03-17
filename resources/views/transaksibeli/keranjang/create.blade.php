@@ -5,38 +5,39 @@
   @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
   @endif
+  @if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+  @endif
   <form action="{{ route('keranjang-beli.store') }}" method="post">
     <div class="row">
-        @csrf
-        <div class="col">
-          <select name="bahan_baku_id" class="form-control">
-            @foreach ($bahanBaku as $b)
-              <option value="{{ $b->id }}">{{ $b->jenis }}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="col">
-          <input type="tel" name="qty" class="form-control" placeholder="qty">
-          @error('qty') <span class="text-danger text-sm">{{ $message }}</span> @enderror
-        </div>
-        <div class="col">
-          <input type="submit" value="Simpan" class="btn btn-primary">
-        </div>
+      @csrf
+      <div class="col-12 col-md-4">
+        <select name="bahan_baku_id" class="form-control">
+          @foreach ($bahanBaku as $b)
+            <option value="{{ $b->id }}">{{ $b->jenis }}</option>
+          @endforeach
+        </select>
       </div>
-  </form>
-  <div class="row mt-4">
-    <div class="col">
-      <a href="{{ route('transaksi-beli.create') }}" class="btn btn-success">
-        Bayar
-      </a>
+      <div class="col-12 col-md-4">
+        <input type="tel" name="qty" class="form-control" placeholder="Jumlah">
+        @error('qty')
+          <span class="text-danger text-sm">{{ $message }}</span>
+        @enderror
+      </div>
+      <div class="col-12 col-md-4">
+        <input type="submit" value="Simpan" class="btn btn-primary">
+        <a href="{{ route('transaksi-beli.create') }}" class="btn btn-success ml-4">
+          Bayar
+        </a>
+      </div>
     </div>
-  </div>
-  <table class="table">
+  </form>
+  <table class="table mt-2">
     <thead>
       <tr>
         <th>No</th>
         <th>Bahan Baku</th>
-        <th>Qty</th>
+        <th>Jumlah</th>
         <th>Subtotal</th>
         <th colspan="2">Opsi</th>
       </tr>
@@ -47,40 +48,16 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $k->jenis }}</td>
           <td>{{ $k->bahan_baku->qty }}</td>
-          <td>{{ $k->bahan_baku->subtotal }}</td>
+          <td>{{ format_money($k->bahan_baku->subtotal) }}</td>
           <td>
-            <a href="{{ route('keranjang-beli.edit', ['keranjang_beli' => $k]) }}" class="text-primary">
+            <a href="{{ route('keranjang-beli.edit', ['keranjang_beli' => $k->bahan_baku->id]) }}"
+              class="text-primary nav-link">
               Edit
             </a>
           </td>
           <td>
-            <a class="text-danger nav-link" href="#" data-toggle="modal" data-target="#delete{{ $k->id }}">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Hapus
-            </a>
-            <!-- Logout Modal-->
-            <div class="modal fade" id="delete{{ $k->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">Apakah anda yakin?</div>
-                  <div class="modal-footer">
-                    <form action="{{ route('keranjang-beli.destroy', ['keranjang_beli' => $k]) }}" method="post">
-                      @csrf
-                      @method('delete')
-                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                      <button class="btn btn-primary" type="submit">Delete</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End of Topbar -->
+            <x-modal :pointer="$k->id" :route="route('keranjang-beli.destroy', ['keranjang_beli' => $k->bahan_baku->id])">
+            </x-modal>
           </td>
         </tr>
       @endforeach

@@ -10,7 +10,7 @@ class SupplierController extends Controller
     public function index()
     {
         return view('supplier.index', [
-            'supplier' => Supplier::all(),
+            'supplier' => Supplier::orderBy('id', 'desc')->paginate(10),
         ]);
     }
 
@@ -21,8 +21,6 @@ class SupplierController extends Controller
 
     public function store(SupplierRequest $request)
     {
-        // https://laravel.com/docs/8.x/eloquent#mass-assignment
-        // https://laravel.com/docs/8.x/validation#form-request-validation
         Supplier::create($request->validated());
         return redirect(route('supplier.index'))->with('success', 'Data Berhasil Disimpan');
     }
@@ -34,14 +32,12 @@ class SupplierController extends Controller
 
     public function update(Supplier $supplier, SupplierRequest $request)
     {
-        // https://laravel.com/docs/8.x/eloquent#mass-updates
         $supplier->update($request->validated());
         return redirect(route('supplier.index'))->with('success', 'Data Berhasil Disimpan');
     }
 
     public function destroy(Supplier $supplier)
     {
-        // https://laravel.com/docs/8.x/eloquent#deleting-models
         $supplier->delete();
         return redirect(route('supplier.index'))->with('success', 'Data Berhasil Disimpan');
     }

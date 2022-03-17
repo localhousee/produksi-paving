@@ -17,7 +17,7 @@
     </tr>
     <tr>
       <td>Bayar</td>
-      <td>: {{ $transaksi->bayar }}</td>
+      <td>: {{ format_money($transaksi->bayar) }}</td>
     </tr>
     <tr>
       <td>Daftar Paving</td>
@@ -25,14 +25,14 @@
         <table class="table">
           <tr>
             <td>Jenis</td>
-            <td>Qty</td>
+            <td>Jumlah</td>
             <td>Subtotal</td>
           </tr>
           @foreach ($transaksi->paving as $p)
             <tr>
               <td>{{ $p->jenis }}</td>
               <td>{{ $p->paving->qty }}</td>
-              <td>{{ $p->paving->subtotal }}</td>
+              <td>{{ format_money($p->paving->subtotal) }}</td>
             </tr>
           @endforeach
         </table>
@@ -40,11 +40,11 @@
     </tr>
     <tr>
       <td>Total</td>
-      <td>: {{ $transaksi->total }}</td>
+      <td>: {{ format_money($transaksi->total) }}</td>
     </tr>
     <tr>
       <td>Status</td>
-      <td>: {{ $transaksi->status }}</td>
+      <td>: {{ ucfirst($transaksi->status) }}</td>
     </tr>
   </table>
 @endsection

@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <td>Gambar</td>
-      <td><img src="{{ $paving->image }}" height="40px" width="40px"></td>
+      <td><img src="{{ $paving->gambar }}" height="20%" width="20%"></td>
     </tr>
     <tr>
       <td>Harga</td>

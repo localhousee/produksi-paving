@@ -69,9 +69,9 @@ class KeranjangBeliController extends Controller
         $keranjang = KeranjangBeli::find($keranjang);
         $transaksi = TransaksiBeli::find($keranjang->transaksi_beli_id);
         $bahan_baku = $transaksi->bahan_baku()->find($keranjang->bahan_baku_id)->first();
-        
+
         $bahan_baku->update([
-            'stok' =>$bahan_baku->stok + $transaksi->bahan_baku[0]->bahan_baku->qty,
+            'stok' => $bahan_baku->stok + $transaksi->bahan_baku[0]->bahan_baku->qty,
         ]);
 
         $keranjang->delete();

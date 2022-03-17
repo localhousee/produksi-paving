@@ -12,7 +12,7 @@ class ProduksiPavingController extends Controller
     {
         return view('produksi.paving.index', [
             'produksi' => $produksi,
-            'paving' => $produksi->paving()->get(),
+            'paving' => $produksi->paving()->paginate(10),
         ]);
     }
 
@@ -26,7 +26,6 @@ class ProduksiPavingController extends Controller
 
     public function store(Produksi $produksi, ProduksiPavingRequest $request)
     {
-        // https://laravel.com/docs/8.x/eloquent-relationships#attaching-detaching
         $produksi->paving()->attach($request->paving_id, [
             'jumlah_produksi' => $request->jumlah_produksi,
         ]);
@@ -35,8 +34,8 @@ class ProduksiPavingController extends Controller
         $paving->update(['stok' => $paving->stok + $request->jumlah_produksi]);
 
         $bahanBaku = Paving::find($request->paving_id)->bahan_baku()->get();
-        
-        foreach($bahanBaku as $b) {
+
+        foreach ($bahanBaku as $b) {
             $b->stok = $b->stok - ($request->jumlah_produksi * $b->bahan_baku->jumlah);
             $b->save();
         }
@@ -54,12 +53,10 @@ class ProduksiPavingController extends Controller
 
     public function update(Produksi $produksi, Paving $paving, ProduksiPavingRequest $request)
     {
-        // https://laravel.com/docs/8.x/eloquent-relationships#updating-a-record-on-the-intermediate-table
         $bahanBaku = $paving->bahan_baku()->get();
 
-        // Mengembalikan Stok Semua Bahan Baku Paving
-        foreach($bahanBaku as $b) {
-            foreach($produksi->paving as $p) {
+        foreach ($bahanBaku as $b) {
+            foreach ($produksi->paving as $p) {
                 $b->stok = $b->stok + ($p->paving->jumlah_produksi * $b->bahan_baku->jumlah) - ($request->jumlah_produksi * $b->bahan_baku->jumlah);
                 $p->stok = $p->stok - $p->paving->jumlah_produksi;
                 $p->save();
@@ -80,8 +77,8 @@ class ProduksiPavingController extends Controller
     public function destroy(Produksi $produksi, Paving $paving)
     {
         $bahanBaku = $paving->bahan_baku()->get();
-        foreach($bahanBaku as $b) {
-            foreach($produksi->paving as $p) {
+        foreach ($bahanBaku as $b) {
+            foreach ($produksi->paving as $p) {
                 $b->stok = $b->stok + ($p->paving->jumlah_produksi * $b->bahan_baku->jumlah);
                 $p->stok = $p->stok + $p->paving->jumlah_produksi;
                 $p->save();
@@ -91,7 +88,6 @@ class ProduksiPavingController extends Controller
 
         $produksiSebelumnya = $produksi->paving()->first()->paving->jumlah_produksi;
         $paving->update(['stok' => $paving->stok - $produksiSebelumnya]);
-        // https://laravel.com/docs/8.x/eloquent-relationships#attaching-detaching
         $produksi->paving()->detach($paving);
         return redirect(route('produksi.paving.index', ['produksi' => $produksi]))->with('success', 'Data Telah Disimpan');
     }

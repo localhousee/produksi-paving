@@ -10,7 +10,7 @@ class PembeliController extends Controller
     public function index()
     {
         return view('pembeli.index', [
-            'pembeli' => Pembeli::all(),
+            'pembeli' => Pembeli::orderBy('id', 'desc')->paginate(10),
         ]);
     }
 
@@ -21,8 +21,6 @@ class PembeliController extends Controller
 
     public function store(PembeliRequest $request)
     {
-        // https://laravel.com/docs/8.x/eloquent#mass-assignment
-        // https://laravel.com/docs/8.x/validation#form-request-validation
         Pembeli::create($request->validated());
         return redirect(route('pembeli.index'))->with('success', 'Data Berhasil Disimpan');
     }
@@ -34,15 +32,13 @@ class PembeliController extends Controller
 
     public function update(Pembeli $pembeli, PembeliRequest $request)
     {
-        // https://laravel.com/docs/8.x/eloquent#mass-updates
         $pembeli->update($request->validated());
         return redirect(route('pembeli.index'))->with('success', 'Data Berhasil Disimpan');
     }
 
     public function destroy(Pembeli $pembeli)
     {
-        // https://laravel.com/docs/8.x/eloquent#deleting-models
         $pembeli->delete();
-        return redirect(route('pembeli.index'))->with('success', 'Data Berhasil Disimpan');
+        return redirect(route('pembeli.index'))->with('success', 'Data Berhasil Dihapus');
     }
 }

@@ -14,8 +14,8 @@ class CreateBahanBakuPavingTable extends Migration
     public function up()
     {
         Schema::create('bahan_baku_paving', function (Blueprint $table) {
-            $table->foreignId('paving_id')->constrained('paving');
-            $table->foreignId('bahan_baku_id')->constrained('bahan_baku');
+            $table->foreignId('paving_id')->constrained('paving')->cascadeOnDelete();
+            $table->foreignId('bahan_baku_id')->constrained('bahan_baku')->cascadeOnDelete();
             $table->integer('jumlah');
         });
     }

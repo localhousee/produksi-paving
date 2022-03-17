@@ -21,14 +21,14 @@
         <table class="table">
           <tr>
             <td>Jenis</td>
-            <td>Qty</td>
+            <td>Jumlah</td>
             <td>Subtotal</td>
           </tr>
           @foreach ($transaksi->bahan_baku as $b)
             <tr>
               <td>{{ $b->jenis }}</td>
               <td>{{ $b->bahan_baku->qty }}</td>
-              <td>{{ $b->bahan_baku->subtotal }}</td>
+              <td>{{ format_money($b->bahan_baku->subtotal) }}</td>
             </tr>
           @endforeach
         </table>
@@ -36,7 +36,7 @@
     </tr>
     <tr>
       <td>Total</td>
-      <td>: {{ $transaksi->total }}</td>
+      <td>: {{ format_money($transaksi->total) }}</td>
     </tr>
   </table>
 @endsection

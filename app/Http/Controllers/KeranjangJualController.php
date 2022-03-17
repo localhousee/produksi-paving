@@ -70,9 +70,9 @@ class KeranjangJualController extends Controller
         $keranjang = KeranjangJual::find($keranjang);
         $transaksi = TransaksiJual::find($keranjang->transaksi_jual_id);
         $paving = $transaksi->paving()->find($keranjang->paving_id)->first();
-        
+
         $paving->update([
-            'stok' =>$paving->stok + $transaksi->paving[0]->paving->qty,
+            'stok' => $paving->stok + $transaksi->paving[0]->paving->qty,
         ]);
 
         $keranjang->delete();

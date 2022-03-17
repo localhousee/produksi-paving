@@ -5,7 +5,7 @@
   @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
   @endif
-  <a class="btn btn-primary" href="{{ route('keranjang-jual.create') }}">Tambah</a>
+  <a class="btn btn-primary mb-2" href="{{ route('keranjang-jual.create') }}">Tambah</a>
   <table class="table">
     <thead>
       <tr>
@@ -22,44 +22,21 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $t->tgl_transaksi }}</td>
           <td>{{ $t->no_nota }}</td>
-          <td>{{ $t->status }}</td>
-          <td><a class="text-success" href="{{ route('transaksi-jual.show', ['transaksi_jual' => $t->id]) }}">Detail</a></td>
+          <td>{{ ucfirst($t->status) }}</td>
+          <td><a class="text-success nav-link"
+              href="{{ route('transaksi-jual.show', ['transaksi_jual' => $t->id]) }}">Detail</a></td>
           <td>
             @if ($t->status !== 'lunas')
-              <a class="text-primary" href="{{ route('transaksi-jual.edit', ['transaksi_jual' => $t->id]) }}">Lunas</a>
+              <a class="text-primary nav-link"
+                href="{{ route('transaksi-jual.edit', ['transaksi_jual' => $t->id]) }}">Lunas</a>
             @endif
           </td>
           <td>
-            <a class="text-danger nav-link" href="#" data-toggle="modal" data-target="#delete{{ $t->id }}">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Hapus
-            </a>
-            <!-- Logout Modal-->
-            <div class="modal fade" id="delete{{ $t->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">Apakah anda yakin?</div>
-                  <div class="modal-footer">
-                    <form action="{{ route('transaksi-jual.destroy', ['transaksi_jual' => $t]) }}" method="post">
-                      @csrf
-                      @method('delete')
-                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                      <button class="btn btn-primary" type="submit">Delete</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End of Topbar -->
+            <x-modal :pointer="$t->id" :route="route('transaksi-jual.destroy', ['transaksi_jual' => $t])"></x-modal>
           </td>
         </tr>
       @endforeach
     </tbody>
   </table>
+  {{ $transaksi->links() }}
 @endsection
