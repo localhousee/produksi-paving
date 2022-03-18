@@ -3,37 +3,76 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Paving;
 use App\Models\Pembeli;
 use App\Models\Produksi;
 use App\Models\Supplier;
+use App\Models\KeranjangJual;
 use App\Models\TransaksiJual;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
         User::factory()->create(['email' => 'admin@example.com']);
-        Pembeli::factory(5)->create();
+        Pembeli::factory(30)->create();
         Supplier::factory(2)->create();
         $this->seedBahanBaku();
         $this->seedPaving();
         $this->seedBahanBakuPaving();
         $this->seedProduksi();
+        $this->seedTransaksiJual();
+    }
+
+    private function seedTransaksiJual()
+    {
+        for ($i = 1; $i <= 12; $i++) {
+
+            for ($j = 1; $j <= 31; $j++) {
+
+                $randomNumbers = rand(1, 100);
+
+                for ($k = 0; $k < $randomNumbers; $k++) {
+
+                    if ($i === 2 && $j > 29) {
+                        continue;
+                    }
+
+                    $randomPaving = Paving::inrandomOrder()->first();
+
+                    $transaksi = TransaksiJual::create([
+                        'no_nota' => 'TJ' . now()->format('Y') . $i . $j . $k,
+                        'tgl_transaksi' => now()->format('Y') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '-' . str_pad($j, 2, '0', STR_PAD_LEFT),
+                        'bayar' => 0,
+                        'total' => 0,
+                        'status' => 'lunas',
+                        'pembeli_id' => rand(1, 30),
+                    ]);
+
+                    $keranjang = KeranjangJual::create([
+                        'transaksi_jual_id' => $transaksi->id,
+                        'paving_id' => $randomPaving->id,
+                        'qty' => $qty = rand(10, 1000),
+                        'subtotal' => $qty * $randomPaving->harga,
+                    ]);
+
+                    $transaksi->update([
+                        'bayar' => $keranjang->subtotal,
+                        'total' => $keranjang->subtotal,
+                    ]);
+                }
+            }
+        }
     }
 
     private function seedPaving()
     {
         $paving = [
-            ['jenis' => 'Bata', 'stok' => 100, 'ukuran' => '10.5 x 21', 'harga' => 10000, 'deskripsi' => 'Bata', 'satuan' => 'Kg', 'gambar' => 'paving/bata.jpg'],
-            ['jenis' => 'Segitiga', 'stok' => 100, 'ukuran' => '19.6 x 9.6', 'harga' => 10000, 'deskripsi' => 'Segitiga', 'satuan' => 'Kg', 'gambar' => 'paving/segitiga.jpg'],
-            ['jenis' => 'Segienam', 'stok' => 100, 'ukuran' => '23', 'harga' => 10000, 'deskripsi' => 'Segienam', 'satuan' => 'Kg', 'gambar' => "paving/hexagon.jpg"],
+            ['jenis' => 'Bata', 'stok' => 100, 'ukuran' => '10.5 x 21', 'harga' => 10000, 'deskripsi' => 'Bata', 'satuan' => 'Kg', 'gambar' => null],
+            ['jenis' => 'Segitiga', 'stok' => 100, 'ukuran' => '19.6 x 9.6', 'harga' => 10000, 'deskripsi' => 'Segitiga', 'satuan' => 'Kg', 'gambar' => null],
+            ['jenis' => 'Segienam', 'stok' => 100, 'ukuran' => '23', 'harga' => 10000, 'deskripsi' => 'Segienam', 'satuan' => 'Kg', 'gambar' => null],
         ];
 
         DB::table('paving')->insert($paving);

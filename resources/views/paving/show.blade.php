@@ -12,20 +12,20 @@
       <td>{{ $paving->stok }}</td>
     </tr>
     <tr>
-      <td>Ukuran</td>
+      <td>Ukuran (cm)</td>
       <td>{{ $paving->ukuran }}</td>
     </tr>
     <tr>
       <td>Deskripsi</td>
       <td>{{ $paving->deskripsi }}</td>
     </tr>
-    <tr>
+    {{-- <tr>
       <td>Gambar</td>
       <td><img src="{{ $paving->gambar }}" height="20%" width="20%"></td>
-    </tr>
+    </tr> --}}
     <tr>
       <td>Harga</td>
-      <td>{{ $paving->harga }}</td>
+      <td>{{ format_money($paving->harga) }}</td>
     </tr>
     <tr>
       <td>Satuan</td>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeranjangBeliController;
 use App\Http\Controllers\KeranjangJualController;
 use App\Http\Controllers\PavingController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\TransaksiJualController;
 Route::redirect('/', 'login');
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
-    Route::view('/', 'dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard');
     Route::resource('pembeli', PembeliController::class)->except('show');
     Route::resource('supplier', SupplierController::class)->except('show');
     Route::resource('bahan-baku', BahanBakuController::class)->except('show');

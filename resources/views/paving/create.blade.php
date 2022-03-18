@@ -47,13 +47,13 @@
           <span class="text-danger text-sm">{{ $message }}</span>
         @enderror
       </div>
-      <div class="col-12 col-md-6 col-lg-4 mb-2">
+      {{-- <div class="col-12 col-md-6 col-lg-4 mb-2">
         <label for="gambar">Gambar</label>
         <input type="file" class="form-control" name="gambar" nameidgambar">
         @error('gambar')
           <span class="text-danger text-sm">{{ $message }}</span>
         @enderror
-      </div>
+      </div> --}}
       <div class="col-12 col-md-6 col-lg-4 mb-2">
         <label for="semen">Banyak Semen yang Dibutuhkan (sak)</label>
         <input type="tel" class="form-control" name="semen" id="semen">
