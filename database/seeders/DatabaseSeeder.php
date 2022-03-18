@@ -26,6 +26,12 @@ class DatabaseSeeder extends Seeder
         $this->seedTransaksiJual();
     }
 
+    private function validateDate($date, $format = 'Y-m-d')
+    {
+        $d = \DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
+    }
+
     private function seedTransaksiJual()
     {
         for ($i = 1; $i <= 12; $i++) {
@@ -35,8 +41,9 @@ class DatabaseSeeder extends Seeder
                 $randomNumbers = rand(1, 100);
 
                 for ($k = 0; $k < $randomNumbers; $k++) {
+                    $date = now()->format('Y') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '-' . str_pad($j, 2, '0', STR_PAD_LEFT);
 
-                    if ($i === 2 && $j > 29) {
+                    if (!$this->validateDate($date, 'Y-m-d')) {
                         continue;
                     }
 
@@ -44,7 +51,7 @@ class DatabaseSeeder extends Seeder
 
                     $transaksi = TransaksiJual::create([
                         'no_nota' => 'TJ' . now()->format('Y') . $i . $j . $k,
-                        'tgl_transaksi' => now()->format('Y') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '-' . str_pad($j, 2, '0', STR_PAD_LEFT),
+                        'tgl_transaksi' => $date,
                         'bayar' => 0,
                         'total' => 0,
                         'status' => 'lunas',
