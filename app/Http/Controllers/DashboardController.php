@@ -60,7 +60,7 @@ class DashboardController extends Controller
         $barData = [];
 
         for ($i = 1; $i <= count($this->barLabels); $i++) {
-            $barData[] = TransaksiJual::whereDate('tgl_transaksi', 'like', now()->format('Y') . '-' . str_pad($i, 2, "0", STR_PAD_LEFT) . '-%')->count();
+            $barData[] = TransaksiJual::where('tgl_transaksi', 'like', now()->format('Y') . '-' . str_pad($i, 2, "0", STR_PAD_LEFT) . '%')->count();
         }
 
         return $barData;
