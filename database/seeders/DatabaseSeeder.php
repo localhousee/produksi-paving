@@ -7,6 +7,7 @@ use App\Models\Paving;
 use App\Models\Pembeli;
 use App\Models\Produksi;
 use App\Models\Supplier;
+use App\Models\BahanBaku;
 use App\Models\KeranjangJual;
 use App\Models\TransaksiJual;
 use Illuminate\Database\Seeder;
@@ -24,12 +25,54 @@ class DatabaseSeeder extends Seeder
         $this->seedBahanBakuPaving();
         $this->seedProduksi();
         $this->seedTransaksiJual();
+        $this->seedTransaksiBeli();
     }
 
     private function validateDate($date, $format = 'Y-m-d')
     {
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) === $date;
+    }
+    
+    private function seedTransaksiBeli()
+    {
+        for ($i = 1; $i <= 12; $i++) {
+
+            for ($j = 1; $j <= 31; $j++) {
+
+                $randomNumbers = rand(1, 3);
+
+                for ($k = 0; $k < $randomNumbers; $k++) {
+                    $date = now()->format('Y') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '-' . str_pad($j, 2, '0', STR_PAD_LEFT);
+
+                    if (!$this->validateDate($date, 'Y-m-d')) {
+                        continue;
+                    }
+
+                    $randomBahanBaku = BahanBaku::inrandomOrder()->first();
+
+                    $transaksi = TransaksiBeli::create([
+                        'no_nota' => 'TB' . now()->format('Y') . $i . $j . $k,
+                        'tgl_transaksi' => $date,
+                        'bayar' => 0,
+                        'total' => 0,
+                        'supplier_id' => rand(1, 2),
+                    ]);
+
+                    $keranjang = KeranjangBeli::create([
+                        'transaksi_beli_id' => $transaksi->id,
+                        'bahan_baku_id' => $randomBahanBaku->id,
+                        'qty' => $qty = rand(10, 1000),
+                        'subtotal' => $qty * $randomBahanBaku->harga,
+                    ]);
+
+                    $transaksi->update([
+                        'bayar' => $keranjang->subtotal,
+                        'total' => $keranjang->subtotal,
+                    ]);
+                }
+            }
+        }
     }
 
     private function seedTransaksiJual()
