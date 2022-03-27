@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
             for ($j = 1; $j <= 31; $j++) {
 
-                $randomNumbers = rand(1, 100);
+                $randomNumbers = rand(1, 3);
 
                 for ($k = 0; $k < $randomNumbers; $k++) {
                     $date = now()->format('Y') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '-' . str_pad($j, 2, '0', STR_PAD_LEFT);
