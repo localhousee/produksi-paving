@@ -9,7 +9,9 @@ use App\Models\Produksi;
 use App\Models\Supplier;
 use App\Models\BahanBaku;
 use App\Models\KeranjangJual;
+use App\Models\KeranjangBeli;
 use App\Models\TransaksiJual;
+use App\Models\TransaksiBeli;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
