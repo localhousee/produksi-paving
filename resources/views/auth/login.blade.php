@@ -10,11 +10,15 @@
       <form class="user" action="{{ route('login') }}" method="POST">
         @csrf
         <div class="form-group">
-          <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address">
-          @if($errors->any()) <span class="text-sm text-danger">Email / Password Salah</span> @endif
+          <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
+            aria-describedby="emailHelp" placeholder="Email Address" value="admin@produksi-paving">
+          @if ($errors->any())
+            <span class="text-sm text-danger">Email / Password Salah</span>
+          @endif
         </div>
         <div class="form-group">
-          <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+          <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword"
+            placeholder="Password" value="password">
         </div>
         <button class="btn btn-primary btn-user btn-block" type="submit">
           Login

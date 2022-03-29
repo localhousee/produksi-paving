@@ -35,19 +35,19 @@ class DatabaseSeeder extends Seeder
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) === $date;
     }
-    
+
     private function seedTransaksiBeli()
     {
         for ($i = 1; $i <= 12; $i++) {
 
             for ($j = 1; $j <= 31; $j++) {
 
-                $randomNumbers = rand(1, 3);
+                $randomNumbers = rand(1, 4);
 
                 for ($k = 0; $k < $randomNumbers; $k++) {
                     $date = now()->format('Y') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '-' . str_pad($j, 2, '0', STR_PAD_LEFT);
 
-                    if (!$this->validateDate($date, 'Y-m-d')) {
+                    if (!$this->validateDate($date)) {
                         continue;
                     }
 
@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
                     $keranjang = KeranjangBeli::create([
                         'transaksi_beli_id' => $transaksi->id,
                         'bahan_baku_id' => $randomBahanBaku->id,
-                        'qty' => $qty = rand(10, 100),
+                        'qty' => $qty = rand(1, 5),
                         'subtotal' => $qty * $randomBahanBaku->harga,
                     ]);
 
@@ -71,6 +71,8 @@ class DatabaseSeeder extends Seeder
                         'total' => $keranjang->subtotal,
                     ]);
                 }
+
+                continue;
             }
         }
     }
@@ -92,12 +94,17 @@ class DatabaseSeeder extends Seeder
 
                     $randomPaving = Paving::inrandomOrder()->first();
 
+                    $status = match (rand(1, 2)) {
+                        1 => 'lunas',
+                        2 => 'DP',
+                    };
+
                     $transaksi = TransaksiJual::create([
                         'no_nota' => 'TJ' . now()->format('Y') . $i . $j . $k,
                         'tgl_transaksi' => $date,
                         'bayar' => 0,
                         'total' => 0,
-                        'status' => 'lunas',
+                        'status' => $status,
                         'pembeli_id' => rand(1, 30),
                     ]);
 
@@ -109,7 +116,10 @@ class DatabaseSeeder extends Seeder
                     ]);
 
                     $transaksi->update([
-                        'bayar' => $keranjang->subtotal,
+                        'bayar' => match ($status) {
+                            'lunas' => $keranjang->subtotal,
+                            'DP' => $keranjang->subtotal / 2,
+                        },
                         'total' => $keranjang->subtotal,
                     ]);
                 }
