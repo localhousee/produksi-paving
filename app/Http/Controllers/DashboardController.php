@@ -52,12 +52,14 @@ class DashboardController extends Controller
 
     private function monthlyExpenses()
     {
-        return DB::table('transaksi_beli')->where('tgl_transaksi', 'like', now()->format('Y-m') . '%')->sum('total');
+        return DB::table('transaksi_beli')->select(DB::raw('sum(total) as total'))
+            ->where('tgl_transaksi', 'like', now()->format('Y-m') . '%')->first()->total;
     }
 
     private function monthlyEarnings()
     {
-        return DB::table('transaksi_jual')->where('tgl_transaksi', 'like', now()->format('Y-m') . '%')->sum('bayar');
+        return DB::table('transaksi_jual')->select(DB::raw('sum(bayar) as bayar'))
+            ->where('tgl_transaksi', 'like', now()->format('Y-m') . '%')->first()->bayar;
     }
 
     private function pieData()
