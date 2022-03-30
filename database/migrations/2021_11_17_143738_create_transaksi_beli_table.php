@@ -17,7 +17,7 @@ class CreateTransaksiBeliTable extends Migration
             $table->id();
             $table->string('no_nota', 45);
             $table->date('tgl_transaksi');
-            $table->string('total');
+            $table->unsignedBigInteger('total');
             $table->foreignId('supplier_id')->nullable()->constrained('supplier');
         });
     }

@@ -17,8 +17,8 @@ class CreateTransaksiJualTable extends Migration
             $table->id();
             $table->string('no_nota', 45);
             $table->date('tgl_transaksi');
-            $table->string('bayar', 45);
-            $table->string('total');
+            $table->unsignedBigInteger('bayar');
+            $table->unsignedBigInteger('total');
             $table->string('status', 45);
             $table->foreignId('pembeli_id')->nullable()->constrained('pembeli');
         });
