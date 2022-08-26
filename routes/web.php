@@ -9,6 +9,7 @@ use App\Http\Controllers\PavingController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\ProduksiPavingController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiBeliController;
 use App\Http\Controllers\TransaksiJualController;
@@ -27,4 +28,5 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('transaksi-jual', TransaksiJualController::class)->except('update');
     Route::resource('transaksi-beli', TransaksiBeliController::class);
     Route::resource('produksi.paving', ProduksiPavingController::class);
+    Route::post('report', ReportController::class)->name('report.store');
 });

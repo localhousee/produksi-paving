@@ -35,4 +35,9 @@ class TransaksiJual extends Model
             ->as('paving')
             ->withPivot('id', 'qty', 'subtotal');
     }
+
+    public function keranjangJual()
+    {
+        return $this->hasMany(KeranjangJual::class);
+    }
 }

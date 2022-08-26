@@ -33,6 +33,11 @@ class TransaksiBeli extends Model
     {
         return $this->belongsToMany(BahanBaku::class, 'keranjang_beli')
             ->as('bahan_baku')
-            ->withPivot('id', 'qty', 'subtotal');
+            ->withPivot('qty', 'subtotal');
+    }
+
+    public function keranjangBeli()
+    {
+        return $this->hasMany(KeranjangBeli::class);
     }
 }
